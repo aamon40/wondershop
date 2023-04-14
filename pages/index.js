@@ -1,7 +1,5 @@
+import Layout from "@/components/Layout";
+
 export default function Home() {
-  return (
-    <>
-      <h1 className="text-3xl font-bold">Wondershop</h1>
-    </>
-  );
+  return <Layout title="Home Page">Homepage</Layout>;
 }
