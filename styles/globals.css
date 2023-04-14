@@ -18,4 +18,13 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+  font-weight: 500;
+}
+
+.card {
+  @apply mb-5 block rounded-lg border-gray-200 shadow-md;
+}
+
+.primary-button {
+  @apply rounded bg-amber-300 py-2 px-4 shadow outline-none hover:bg-amber-400 active:bg-amber-500;
 }
