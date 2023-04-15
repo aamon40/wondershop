@@ -15,7 +15,7 @@ export default function Layout({ title, children }) {
       <div className="flex min-h-screen flex-col justify-between">
         <header>
           <nav className="flex h-12 justify-between items-center px-4 shadow-md">
-            <Link href="/" className="text-lg font-bold">
+            <Link href="/" className="text-lg font-bold text-red">
               Wonder<span className="text-red">Shop</span>
             </Link>
 
