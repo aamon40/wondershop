@@ -6,6 +6,8 @@ import { XCircleIcon } from "@heroicons/react/outline";
 import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 function CartScreen() {
   const router = useRouter();
@@ -16,9 +18,14 @@ function CartScreen() {
   const removeItemHandler = (item) => {
     dispatch({ type: "CART_REMOVE_ITEM", payload: item });
   };
-  const updateCartHandler = (item, qty) => {
+  const updateCartHandler = async (item, qty) => {
     const quantity = Number(qty);
+    const { data } = await axios.get(`/api/products/${item._id}`);
+    if (data.countInStock < quantity) {
+      return toast.error("Sorry. Product is out of stock.");
+    }
     dispatch({ type: "CART_ADD_ITEM", payload: { ...item, quantity } });
+    toast.success("Product is updated in the cart");
   };
 
   return (
@@ -26,7 +33,7 @@ function CartScreen() {
       <h1 className="mb-4 text-xl">Shopping Cart</h1>
       {cartItems.length === 0 ? (
         <div>
-          Cart is empty. <Link href="">Go Shopping</Link>
+          Cart is empty. <Link href="/">Go Shopping</Link>
         </div>
       ) : (
         <div className="grid md:grid-cols-4 md:gap-5">
