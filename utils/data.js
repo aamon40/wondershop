@@ -56,6 +56,8 @@ const data = {
       numReviews: 3,
       countInStock: 20,
       description: "A popular shirt",
+      isFeatured: true,
+      banner: "/images/banner1.jpg",
     },
     {
       name: "Golf Pants",
@@ -68,6 +70,8 @@ const data = {
       numReviews: 13,
       countInStock: 20,
       description: "Smart looking pants",
+      isFeatured: true,
+      banner: "/images/banner2.jpg",
     },
     {
       name: "Fit Pants",
