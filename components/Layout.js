@@ -2,13 +2,14 @@ import { Store } from "@/utils/Store";
 import { ToastContainer } from "react-toastify";
 import Head from "next/head";
 import Link from "next/link";
-
+import SearchIcon from "@heroicons/react/outline/SearchIcon";
 import { Menu } from "@headlessui/react";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext, useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import DropdownLink from "./DropdownLink";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function Layout({ title, children }) {
   const { status, data: session } = useSession();
@@ -27,6 +28,14 @@ export default function Layout({ title, children }) {
     signOut({ callbackUrl: "/login" });
   };
 
+  const [query, setQuery] = useState("");
+
+  const router = useRouter();
+  const submitHandler = (e) => {
+    e.preventDefault();
+    router.push(`/search?query=${query}`);
+  };
+
   return (
     <>
       <Head>
@@ -42,6 +51,24 @@ export default function Layout({ title, children }) {
             <Link href="/" className="text-lg font-bold text-red">
               Wonder<span className="text-red">Shop</span>
             </Link>
+            <form
+              onSubmit={submitHandler}
+              className="mx-auto  hidden  justify-center md:flex"
+            >
+              <input
+                onChange={(e) => setQuery(e.target.value)}
+                type="text"
+                className="rounded-tr-none rounded-br-none p-1 text-sm   focus:ring-0"
+                placeholder="Search products"
+              />
+              <button
+                className="rounded rounded-tl-none rounded-bl-none bg-amber-300 p-1 text-sm dark:text-black"
+                type="submit"
+                id="button-addon2"
+              >
+                <SearchIcon className="h-5 w-5"></SearchIcon>
+              </button>
+            </form>
 
             <div>
               <Link href="/cart" className="p-2">
